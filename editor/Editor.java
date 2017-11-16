@@ -66,21 +66,15 @@ public class Editor extends Application {
             curX = 0;
             curY = 0;
 
-            // Always set the text origin to be VPos.TOP! Setting the origin to be VPos.TOP means
-            // that when the text is assigned a y-position, that position corresponds to the
-            // highest position across all letters (for example, the top of a letter like "I", as
-            // opposed to the top of a letter like "e"), which makes calculating positions much
-            // simpler!
-            
+
         }
 
 
         @Override
         public void handle(KeyEvent keyEvent) {
             if (keyEvent.getEventType() == KeyEvent.KEY_TYPED && !keyEvent.isShortcutDown()) {
-                // Use the KEY_TYPED event rather than KEY_PRESSED for letter keys, because with
-                // the KEY_TYPED event, javafx handles the "Shift" key and associated
-                // capitalization.
+
+
                 String characterTyped = keyEvent.getCharacter();
                 if (characterTyped.length() > 0 && characterTyped.charAt(0) != 8) {
                     // Ignore control keys, which have non-zero length, as well as the backspace key, which is
@@ -97,9 +91,8 @@ public class Editor extends Application {
 
                 }
             } else if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
-                // Arrow keys should be processed using the KEY_PRESSED event, because KEY_PRESSED
-                // events have a code that we can check (KEY_TYPED events don't have an associated
-                // KeyCode).
+
+
                 KeyCode code = keyEvent.getCode();
                 if (code == KeyCode.RIGHT) {
                     page.cursorRight();
@@ -184,9 +177,7 @@ public class Editor extends Application {
         page = new LinkedListDeque<String>(inputFile, textRoot, scrollBar);
         page.reRender(windowHeight, windowWidth);
         
-        // To get information about what keys the user is pressing, create an EventHandler.
-        // EventHandler subclasses must override the "handle" function, which will be called
-        // by javafx.
+
         EventHandler<KeyEvent> keyEventHandler =
                 new KeyEventHandler(root, windowWidth, windowHeight); 
         MouseClickEventHandler mouseEventHandler = new MouseClickEventHandler();  
@@ -228,7 +219,6 @@ public class Editor extends Application {
 
         primaryStage.setTitle("Editor");
 
-        // This is boilerplate, necessary to setup the window where things are displayed.
         primaryStage.setScene(scene);
         primaryStage.show();
     }
